@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.4">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Star Chart&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: Arial, sans-serif;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 20px 20px 90px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>overflow: hidden;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1 { color: #ffd700; text-shadow: 0 0 20px gold; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hour-grid {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: grid;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid-template-columns: repeat(4, 1fr);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 12px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 620px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 30px auto;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hour {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 18px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255,255,255,0.1);<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 15px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>backdrop-filter: blur(10px);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: all 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hour.earned { background: rgba(255, 215, 0, 0.3); box-shadow: 0 0 20px gold; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hour.lost { background: rgba(255, 99, 99, 0.3); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.star-count {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 56px;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: gold;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-shadow: 0 0 30px gold;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 20px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav-bar {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>bottom: 0; left: 0; right: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(0,0,0,0.75);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: space-around;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 -2px 10px rgba(0,0,0,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.nav-btn {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 28px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px 16px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>.shooting-star {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>position: absolute;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 50%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 0 15px white, 0 0 30px gold;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>pointer-events: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>animation: shoot 1.2s linear forwards;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes shoot {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>0% { transform: translate(0, 0) rotate(30deg); opacity: 1; }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>100% { transform: translate(300px, 300px) rotate(30deg); opacity: 0; }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h1&gt;🌠 Star Chart 🌠&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="star-count" id="starCount"&gt;0 / 12&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">  </span></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="hour-grid" id="hourGrid"&gt;&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="nav-bar"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="nav-btn" onclick="window.location.href='index.html'"&gt;🌠&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="nav-btn" onclick="window.location.href='chores.html'"&gt;🧹&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="nav-btn" onclick="window.location.href='prizes.html'"&gt;🏆&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button class="nav-btn" onclick="window.location.href='instructions.html'"&gt;ℹ️&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>let stars = {};</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const hours = Array.from({length: 12}, (_, i) =&gt; 8 + i);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const dailyGoal = 12;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>const creditsPerDay = 10;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function loadData() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const saved = localStorage.getItem('starChart');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>stars = saved ? JSON.parse(saved) : {};</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderGrid();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>checkDailyCompletion();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function saveData() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>localStorage.setItem('starChart', JSON.stringify(stars));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>renderGrid();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>checkDailyCompletion();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function createShootingStar() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const star = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>star.className = 'shooting-star';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const startX = Math.random() * window.innerWidth * 0.6;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>star.style.left = startX + 'px';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>star.style.top = Math.random() * (window.innerHeight * 0.4) + 'px';</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.body.appendChild(star);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>setTimeout(() =&gt; star.remove(), 1500);</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function toggleHour(hour) {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const key = hour.toString();</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (!stars) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>stars = "earned";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>createShootingStar();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>setTimeout(createShootingStar, 180);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else if (stars === "earned") {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>stars = "lost";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>stars = "earned";</p>
+<p class="p1"><span class="Apple-converted-space">        </span>createShootingStar();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>saveData();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function renderGrid() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const grid = document.getElementById('hourGrid');</p>
+<p class="p1"><span class="Apple-converted-space">      </span>grid.innerHTML = '';</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>hours.forEach(hour =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const div = document.createElement('div');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.className = `hour ${stars || ''}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.textContent = `${hour}:00`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>div.onclick = () =&gt; toggleHour(hour);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>grid.appendChild(div);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>const earned = Object.values(stars).filter(s =&gt; s === "earned").length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>document.getElementById('starCount').textContent = `${earned} / ${dailyGoal}`;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function checkDailyCompletion() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>const earned = Object.values(stars).filter(s =&gt; s === "earned").length;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (earned &gt;= dailyGoal) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let credits = parseInt(localStorage.getItem('credits') || '0');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!localStorage.getItem('dailyRewardGiven')) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>credits += creditsPerDay;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>localStorage.setItem('credits', credits);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>localStorage.setItem('dailyRewardGiven', 'true');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>alert(`🎉 Daily goal reached! You earned ${creditsPerDay} credits!`);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>function resetDay() {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (confirm("Reset all stars for today?")) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>stars = {};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>localStorage.removeItem('dailyRewardGiven');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>saveData();</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>window.onload = loadData;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
