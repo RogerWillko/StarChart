@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prizes</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: linear-gradient(to bottom, #2c3e50, #3498db);
+      color: white;
+      margin: 0; 
+      padding: 20px 20px 90px;
+      text-align: center;
+    }
+    h1 { color: #ffd700; }
+    .credits {
+      font-size: 52px;
+      font-weight: bold;
+      color: gold;
+      margin: 20px 0;
+    }
+    .prize {
+      background: rgba(255,255,255,0.15);
+      margin: 15px auto;
+      padding: 18px;
+      max-width: 500px;
+      border-radius: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .redeem-btn {
+      background: #e67e22;
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .nav-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.75);
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 8px 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🏆 Prizes & Rewards 🏆</h1>
+  
+  <div class="credits">
+    <span id="creditCount">0</span> Credits
+  </div>
+
+  <h2>Available Prizes</h2>
+  <div id="prizeList"></div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="window.location.href='index.html'">🌠</button>
+    <button class="nav-btn" onclick="window.location.href='chores.html'">🧹</button>
+    <button class="nav-btn" onclick="window.location.href='prizes.html'">🏆</button>
+    <button class="nav-btn" onclick="window.location.href='instructions.html'">ℹ️</button>
+  </div>
+
+  <script>
+    let totalCredits = 0;
+    let prizes = [
+      { id: 1, name: "Extra Screen Time (30 min)", cost: 5 },
+      { id: 2, name: "Choose Dinner", cost: 8 },
+      { id: 3, name: "Ice Cream Treat", cost: 10 },
+      { id: 4, name: "Toy from Store", cost: 25 }
+    ];
+
+    function loadData() {
+      const saved = localStorage.getItem('credits') || '0';
+      totalCredits = parseInt(saved);
+      document.getElementById('creditCount').textContent = totalCredits;
+      renderPrizes();
+    }
+
+    function saveCredits() {
+      localStorage.setItem('credits', totalCredits);
+      document.getElementById('creditCount').textContent = totalCredits;
+    }
+
+    function renderPrizes() {
+      const container = document.getElementById('prizeList');
+      container.innerHTML = '';
+      
+      prizes.forEach(prize => {
+        const div = document.createElement('div');
+        div.className = 'prize';
+        div.innerHTML = `
+          <span>${prize.name}</span>
+          <span><strong>${prize.cost} credits</strong></span>
+          <button class="redeem-btn" onclick="redeemPrize(${prize.id}, ${prize.cost})" 
+            ${totalCredits >= prize.cost ? '' : 'disabled'}>
+            Redeem
+          </button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function redeemPrize(id, cost) {
+      if (totalCredits >= cost) {
+        totalCredits -= cost;
+        saveCredits();
+        renderPrizes();
+        alert("✅ Prize redeemed!");
+      }
+    }
+
+    window.onload = loadData;
+  </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chore List</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: #f0f8ff; 
+      margin: 0; 
+      padding: 20px 20px 90px;
+      text-align: center;
+    }
+    h1 { color: #ff6b6b; }
+    input { padding: 12px; width: 70%; font-size: 16px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd; }
+    button { padding: 12px 20px; margin: 5px; font-size: 16px; border-radius: 8px; }
+    .chore-item {
+      background: white;
+      padding: 15px;
+      margin: 10px auto;
+      max-width: 500px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .complete-btn { background: #4caf50; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; }
+    .delete-btn { background: #f44336; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+
+    .nav-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.75);
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 8px 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧹 Mom's Chore List 🧹</h1>
+  <p>Complete chores to earn back missed stars</p>
+
+  <input type="text" id="choreInput" placeholder="New chore (ex: Clean your room)">
+  <button onclick="addChore()">Add Chore</button>
+
+  <div id="choreList"></div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="window.location.href='index.html'">🌠</button>
+    <button class="nav-btn" onclick="window.location.href='chores.html'">🧹</button>
+    <button class="nav-btn" onclick="window.location.href='prizes.html'">🏆</button>
+    <button class="nav-btn" onclick="window.location.href='instructions.html'">ℹ️</button>
+  </div>
+
+  <script>
+    let chores = [];
+
+    function loadChores() {
+      const saved = localStorage.getItem('chores');
+      chores = saved ? JSON.parse(saved) : [
+        { id: 1, text: "Clean your room", completed: false, value: 1 },
+        { id: 2, text: "Take out the trash", completed: false, value: 1 }
+      ];
+      renderChores();
+    }
+
+    function saveChores() {
+      localStorage.setItem('chores', JSON.stringify(chores));
+      renderChores();
+    }
+
+    function addChore() {
+      const input = document.getElementById('choreInput');
+      if (!input.value.trim()) return;
+      
+      chores.push({
+        id: Date.now(),
+        text: input.value.trim(),
+        completed: false,
+        value: 1
+      });
+      
+      input.value = "";
+      saveChores();
+    }
+
+    function toggleChore(id) {
+      const chore = chores.find(c => c.id === id);
+      if (chore) {
+        chore.completed = !chore.completed;
+        saveChores();
+      }
+    }
+
+    function deleteChore(id) {
+      if (confirm("Delete this chore?")) {
+        chores = chores.filter(c => c.id !== id);
+        saveChores();
+      }
+    }
+
+    function renderChores() {
+      const container = document.getElementById('choreList');
+      container.innerHTML = '';
+      
+      chores.forEach(chore => {
+        const div = document.createElement('div');
+        div.className = 'chore-item';
+        div.innerHTML = `
+          <span style="text-decoration:${chore.completed ? 'line-through' : 'none'}">
+            ${chore.text}
+          </span>
+          <div>
+            <button class="complete-btn" onclick="toggleChore(${chore.id})">
+              ${chore.completed ? 'Undo' : 'Complete'}
+            </button>
+            <button class="delete-btn" onclick="deleteChore(${chore.id})">🗑️</button>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    window.onload = loadChores;
+  </script>
+</body>
+</html>

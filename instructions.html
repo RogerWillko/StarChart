@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      background: linear-gradient(to bottom, #1e3c72, #2a5298);
+      color: white;
+      margin: 0; 
+      padding: 20px 20px 90px;
+      line-height: 1.6;
+    }
+    h1 { color: #ffd700; text-align: center; }
+    h2 { color: #a5d6ff; margin-top: 30px; }
+    .card {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      margin: 15px auto;
+      max-width: 560px;
+      border-radius: 12px;
+    }
+    .nav-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.75);
+      padding: 12px 0;
+      display: flex;
+      justify-content: space-around;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    }
+    .nav-btn {
+      background: none;
+      border: none;
+      font-size: 28px;
+      cursor: pointer;
+      padding: 8px 16px;
+    }
+  </style>
+</head>
+<body>
+  <h1>How to Use Star Chart</h1>
+
+  <div class="card">
+    <h2>🌠 Dashboard</h2>
+    <p>Tap on any hour to give a star.<br>
+    Green = Star earned<br>
+    Red = Star lost due to behavior</p>
+  </div>
+
+  <div class="card">
+    <h2>🧹 Chore List</h2>
+    <p>Add chores that can be done to earn back lost stars.<br>
+    Mark them complete when your child finishes the task.</p>
+  </div>
+
+  <div class="card">
+    <h2>🏆 Prizes</h2>
+    <p>Credits are automatically awarded when your child reaches the daily star goal.<br>
+    Use those credits to redeem fun rewards.</p>
+  </div>
+
+  <div class="card">
+    <h2>Tips:</h2>
+    <p>• The app saves everything automatically in your browser.<br>
+    • Works offline once loaded.<br>
+    • Best used on a tablet or phone the child can easily tap.</p>
+  </div>
+
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="window.location.href='index.html'">🌠</button>
+    <button class="nav-btn" onclick="window.location.href='chores.html'">🧹</button>
+    <button class="nav-btn" onclick="window.location.href='prizes.html'">🏆</button>
+    <button class="nav-btn" onclick="window.location.href='instructions.html'">ℹ️</button>
+  </div>
+
+</body>
+</html>
