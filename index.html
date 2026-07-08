@@ -120,7 +120,9 @@
     }
 
     function toggleHour(hour) {
-      if (!stars) {
+      const key = hour.toString();
+      
+      if (!stars ) {
         stars = "earned";
         createShootingStar();
         setTimeout(createShootingStar, 180);
@@ -130,6 +132,7 @@
         stars = "earned";
         createShootingStar();
       }
+      
       saveData();
     }
 
@@ -138,8 +141,10 @@
       grid.innerHTML = '';
       
       hours.forEach(hour => {
+        const key = hour.toString();
+        const status = stars || '';
         const div = document.createElement('div');
-        div.className = `hour ${stars || ''}`;
+        div.className = `hour ${status}`;
         div.textContent = `${hour}:00`;
         div.onclick = () => toggleHour(hour);
         grid.appendChild(div);
